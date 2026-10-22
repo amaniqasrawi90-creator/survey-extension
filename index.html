@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://components.connect.trimble.com/trimble-connect-workspace-api/index.js"></script>
+</head>
+<body>
+  <p>Thanks for helping us improve!</p>
+  <button id="open">Open the survey</button>
+
+  <script>
+    const SURVEY_URL = "https://forms.office.com/r/YOUR_SURVEY_ID"; // your survey link
+
+    function openSurvey() {
+      window.open(SURVEY_URL, "_blank", "noopener");
+    }
+
+    document.getElementById("open").onclick = openSurvey;
+
+    (async () => {
+      const API = await TrimbleConnectWorkspace.connect(
+        window.parent,
+        (event, args) => {
+          if (event === "extension.command" && args.data === "open_survey") {
+            openSurvey();
+          }
+        },
+        30000
+      );
+
+      // Adds the item to Trimble Connect's left menu
+      API.ui.setMenu({
+        title: "Survey",
+        icon: "https://your-host.com/survey-icon.png",
+        command: "open_survey"
+      });
+    })();
+  </script>
+</body>
+</html>

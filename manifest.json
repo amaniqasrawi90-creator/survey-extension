@@ -1,0 +1,7 @@
+{
+  "title": "Project Survey",
+  "description": "Quick feedback survey for this project",
+  "icon": "https://your-host.com/survey-icon.png",
+  "url": "https://your-host.com/index.html",
+  "enabled": true
+}
